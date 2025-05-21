@@ -1,14 +1,107 @@
 "use client"
 
-import { useRef, Suspense } from "react"
+import { useRef, useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Download } from "lucide-react"
-import dynamic from "next/dynamic"
+import { ArrowRight, Download, Play, Pause } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Link from "next/link"
 
-// Dynamically import 3D components to avoid SSR issues
-const ThreeScene = dynamic(() => import("./three-scene"), { ssr: false })
+// Video path (files in public folder are served from the root)
+const VIDEO_PATH = "/roadshare_demo_video.mp4"
+
+const VideoPlayer = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [showControls, setShowControls] = useState(false);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.controls = false;
+      video.muted = false; // Ensure audio is not muted
+      video.volume = 0.5; // Set a reasonable default volume
+      
+      const handlePlay = () => {
+        setIsPlaying(true);
+        // Unmute after user interaction
+        if (video.muted) {
+          video.muted = false;
+        }
+      };
+      
+      video.addEventListener('play', handlePlay);
+      video.addEventListener('pause', () => setIsPlaying(false));
+      
+      // Try to play with sound
+      const playWithSound = async () => {
+        try {
+          await video.play();
+        } catch (err) {
+          // If autoplay with sound fails, mute and try again
+          video.muted = true;
+          await video.play();
+        }
+      };
+      
+      // Start playing when user interacts with the page
+      const handleFirstInteraction = () => {
+        playWithSound();
+        document.removeEventListener('click', handleFirstInteraction);
+        document.removeEventListener('scroll', handleFirstInteraction);
+      };
+      
+      document.addEventListener('click', handleFirstInteraction, { once: true });
+      document.addEventListener('scroll', handleFirstInteraction, { once: true, passive: true });
+      
+      return () => {
+        video.removeEventListener('play', handlePlay);
+        video.removeEventListener('pause', () => setIsPlaying(false));
+        document.removeEventListener('click', handleFirstInteraction);
+        document.removeEventListener('scroll', handleFirstInteraction);
+      };
+    }
+  }, []);
+
+  return (
+    <div 
+      className="relative group"
+      onMouseEnter={() => setShowControls(true)}
+      onMouseLeave={() => setShowControls(false)}
+    >
+      <video
+        ref={videoRef}
+        className="block h-[60vh] w-auto"
+        src={VIDEO_PATH}
+        loop
+        playsInline
+      />
+      <button
+        onClick={togglePlay}
+        className={`absolute inset-0 m-auto w-16 h-16 bg-black/50 rounded-full flex items-center justify-center transition-opacity duration-300 ${
+          showControls ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+        }`}
+        aria-label={isPlaying ? 'Pause' : 'Play'}
+      >
+        {isPlaying ? (
+          <Pause className="text-white w-8 h-8" />
+        ) : (
+          <Play className="text-white w-8 h-8 ml-1" />
+        )}
+      </button>
+    </div>
+  );
+};
 
 export default function HeroSection() {
   const containerRef = useRef(null)
@@ -132,19 +225,17 @@ export default function HeroSection() {
         </motion.div>
 
         <motion.div
-          className="h-[500px] lg:h-[600px] relative"
+          className="relative w-full flex justify-center items-start"
           style={{ y, opacity }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-2xl blur-3xl opacity-30"></div>
-          <div className="h-full w-full rounded-2xl overflow-hidden border border-purple-500/20 backdrop-blur-sm">
-            <Suspense
-              fallback={<div className="w-full h-full flex items-center justify-center">Loading 3D model...</div>}
-            >
-              <ThreeScene />
-            </Suspense>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-2xl blur-3xl opacity-30 -m-4"></div>
+          <div className="relative inline-block">
+            <div className="relative rounded-2xl border border-purple-500/20 backdrop-blur-sm overflow-hidden">
+              <VideoPlayer />
+            </div>
           </div>
         </motion.div>
       </div>
