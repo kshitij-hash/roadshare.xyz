@@ -112,8 +112,6 @@ export default function HeroSection() {
   })
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 200])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-
   return (
     <section
       ref={containerRef}
@@ -175,28 +173,28 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-nowrap gap-4 overflow-x-auto pb-2 -mx-2 px-2"
+            initial={{ y: 20 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <Link href="#demo" className="inline-flex">
-              <Button className="bg-gradient-to-r from-purple-500 to-cyan-400 text-black hover:from-white hover:to-white hover:text-purple-500 px-6 py-3 h-auto group relative overflow-hidden inline-flex items-center transition-all duration-300 border border-transparent hover:border-purple-500">
+            <Link href="#demo" className="inline-flex flex-shrink-0">
+              <Button className="bg-gradient-to-r from-purple-500 to-cyan-400 text-black hover:from-white hover:to-white hover:text-purple-500 px-6 py-3 h-auto group relative overflow-hidden inline-flex items-center transition-all duration-300 border border-transparent hover:border-purple-500 whitespace-nowrap">
                 <span className="relative z-10">Get Started</span>
                 <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 flex-shrink-0" />
                 <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
             </Link>
 
-            <Link href="#download" className="inline-flex">
-            <Button
-              variant="outline"
-              className="border-purple-500 text-purple-400 hover:bg-gradient-to-r hover:from-purple-500 hover:to-cyan-400 hover:text-white px-6 py-3 h-auto group relative overflow-hidden inline-flex items-center whitespace-nowrap transition-all duration-300"
-            >
-              <Download className="mr-2 h-4 w-4 flex-shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:text-white" />
-              <span className="relative z-10 transition-all duration-300 group-hover:translate-x-0.5">Download App</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-            </Button>
+            <Link href="#download" className="inline-flex flex-shrink-0">
+              <Button
+                variant="outline"
+                className="border-purple-500 text-purple-400 hover:bg-gradient-to-r hover:from-purple-500 hover:to-cyan-400 hover:text-white px-6 py-3 h-auto group relative overflow-hidden inline-flex items-center whitespace-nowrap transition-all duration-300"
+              >
+                <Download className="mr-2 h-4 w-4 flex-shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:text-white" />
+                <span className="relative z-10 transition-all duration-300 group-hover:translate-x-0.5">Download App</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+              </Button>
             </Link>
           </motion.div>
 
@@ -227,7 +225,7 @@ export default function HeroSection() {
 
         <motion.div
           className="relative w-full flex justify-center items-start"
-          style={{ y, opacity }}
+          style={{ y }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -242,7 +240,7 @@ export default function HeroSection() {
       </div>
 
       <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex items-center gap-2"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden md:flex items-center gap-2"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
