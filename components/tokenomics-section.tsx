@@ -65,16 +65,14 @@ export default function TokenomicsSection() {
 
   return (
     <section id="tokenomics" className="py-20 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-purple-900/20 via-black to-black pointer-events-none"></div>
-
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-black to-black pointer-events-none -z-10"></div>
+      
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400">
-              Tokenomics
-            </span>
+            RoadShare <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400">Tokenomics</span>
           </h2>
-          <p className="text-gray-300">Understanding the RoadShare token economy and distribution</p>
+          <p className="text-gray-300">A fair and sustainable token distribution for the RoadShare ecosystem</p>
         </div>
 
         <div ref={ref} className="grid md:grid-cols-2 gap-12 items-center">

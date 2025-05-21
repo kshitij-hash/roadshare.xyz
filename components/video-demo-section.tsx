@@ -9,7 +9,7 @@ export default function VideoDemoSection() {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section className="py-20 relative">
+    <section id="demo" className="py-20 relative">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-black to-black pointer-events-none"></div>
 
       <div className="container mx-auto px-4">

@@ -2,8 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Apple, ArrowRight, Globe, Smartphone } from "lucide-react"
+import { Smartphone } from "lucide-react"
 import Image from "next/image"
 
 export default function DownloadSection() {
@@ -12,10 +11,17 @@ export default function DownloadSection() {
 
   return (
     <section id="download" className="py-20 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-black to-black pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-black to-black pointer-events-none -z-10"></div>
+      
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Ready to <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400">Get Started</span>?
+          </h2>
+          <p className="text-gray-300">Download the RoadShare app and start earning tokens for your daily commute</p>
+        </div>
 
-      <div ref={ref} className="container mx-auto px-4">
-        <div className="relative rounded-3xl overflow-hidden">
+        <div ref={ref} className="relative rounded-3xl overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/40 to-cyan-900/40"></div>
 
           <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center p-8 md:p-12">
@@ -25,13 +31,6 @@ export default function DownloadSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold">
-                Ready to{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400">
-                  Start Earning
-                </span>{" "}
-                While You Drive?
-              </h2>
 
               <p className="text-gray-300 text-lg">
                 Download the RoadShare app today and join thousands of drivers already earning rewards for their
@@ -86,21 +85,18 @@ export default function DownloadSection() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative w-[280px] h-[560px] rounded-[40px] border-8 border-black bg-black overflow-hidden shadow-2xl">
                   <Image
-                    src="/placeholder.svg?height=1080&width=540"
+                    src="/roadshare.png"
                     alt="RoadShare App"
                     fill
-                    className="object-cover"
+                    className="object-cover scale-90"
+                    priority
                   />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <div className="text-xl font-bold mb-2">RoadShare</div>
                     <div className="text-sm text-gray-300 mb-4">Drive. Share. Earn.</div>
-                    <Button className="w-full bg-gradient-to-r from-purple-500 to-cyan-400 text-black hover:opacity-90">
-                      Coming Soon...
-                      {/* <ArrowRight className="ml-2 h-4 w-4" /> */}
-                    </Button>
                   </div>
                 </div>
               </div>

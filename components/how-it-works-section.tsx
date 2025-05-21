@@ -37,8 +37,8 @@ export default function HowItWorksSection() {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section id="how-it-works" className="py-20 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-black to-black pointer-events-none"></div>
+    <section id="how-it-works" className="py-20 relative z-10">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-black to-black pointer-events-none -z-10"></div>
 
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">

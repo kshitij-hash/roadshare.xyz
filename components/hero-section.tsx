@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Download } from "lucide-react"
 import dynamic from "next/dynamic"
 import { motion, useScroll, useTransform } from "framer-motion"
+import Link from "next/link"
 
 // Dynamically import 3D components to avoid SSR issues
 const ThreeScene = dynamic(() => import("./three-scene"), { ssr: false })
@@ -85,12 +86,15 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <Button className="bg-gradient-to-r from-purple-500 to-cyan-400 text-black hover:from-white hover:to-white hover:text-purple-500 px-6 py-3 h-auto group relative overflow-hidden inline-flex items-center transition-all duration-300 border border-transparent hover:border-purple-500">
-              <span className="relative z-10">Get Started</span>
-              <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 flex-shrink-0" />
-              <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </Button>
+            <Link href="#demo" className="inline-flex">
+              <Button className="bg-gradient-to-r from-purple-500 to-cyan-400 text-black hover:from-white hover:to-white hover:text-purple-500 px-6 py-3 h-auto group relative overflow-hidden inline-flex items-center transition-all duration-300 border border-transparent hover:border-purple-500">
+                <span className="relative z-10">Get Started</span>
+                <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 flex-shrink-0" />
+                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </Button>
+            </Link>
 
+            <Link href="#download" className="inline-flex">
             <Button
               variant="outline"
               className="border-purple-500 text-purple-400 hover:bg-gradient-to-r hover:from-purple-500 hover:to-cyan-400 hover:text-white px-6 py-3 h-auto group relative overflow-hidden inline-flex items-center whitespace-nowrap transition-all duration-300"
@@ -99,6 +103,7 @@ export default function HeroSection() {
               <span className="relative z-10 transition-all duration-300 group-hover:translate-x-0.5">Download App</span>
               <span className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-all duration-300" />
             </Button>
+            </Link>
           </motion.div>
 
           {/* <motion.div

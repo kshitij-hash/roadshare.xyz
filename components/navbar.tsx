@@ -47,17 +47,13 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-          <Button 
-            variant="outline" 
-            className="border-purple-500 text-purple-400 hover:bg-gradient-to-r hover:from-purple-500 hover:to-cyan-400 hover:text-white px-4 py-2 transition-all duration-300"
-          >
-            Login
-          </Button>
-          <Button 
-            className="bg-gradient-to-r from-purple-500 to-cyan-400 text-black hover:from-white hover:to-white hover:text-purple-500 px-4 py-2 transition-all duration-300 border border-transparent hover:border-purple-500"
-          >
-            Get Started
-          </Button>
+          <Link href="#demo">
+            <Button 
+              className="bg-gradient-to-r from-purple-500 to-cyan-400 text-black hover:from-white hover:to-white hover:text-purple-500 px-4 py-2 transition-all duration-300 border border-transparent hover:border-purple-500"
+            >
+              Get Started
+            </Button>
+          </Link>
         </div>
 
         <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -98,12 +94,11 @@ export default function Navbar() {
               Download
             </Link>
             <div className="flex flex-col gap-2 pt-2 border-t border-gray-800">
-              <Button variant="outline" className="border-purple-500 text-purple-400 hover:bg-purple-500/10 w-full">
-                Login
-              </Button>
-              <Button className="bg-gradient-to-r from-purple-500 to-cyan-400 text-black hover:opacity-90 w-full">
-                Get Started
-              </Button>
+              <Link href="#demo" className="w-full" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="bg-gradient-to-r from-purple-500 to-cyan-400 text-black hover:from-white hover:to-white hover:text-purple-500 w-full">
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
