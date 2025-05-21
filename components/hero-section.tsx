@@ -85,6 +85,7 @@ const VideoPlayer = () => {
         src={VIDEO_PATH}
         loop
         playsInline
+        autoPlay
       />
       <button
         onClick={togglePlay}
